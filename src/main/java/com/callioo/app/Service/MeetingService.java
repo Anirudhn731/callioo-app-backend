@@ -72,7 +72,7 @@ public class MeetingService {
     public List<Meeting> getUpcomingMeetings(String email) {
         List<Meeting> upcomingMeetings = meetingRepository.findByEmail(email).stream()
                 .filter((meeting) -> (meeting.getEndedAt() == null
-                        || !Instant.now().minus(Duration.ofHours(24)).isAfter(meeting.getStartedAt())))
+                        && !Instant.now().minus(Duration.ofHours(24)).isAfter(meeting.getStartedAt())))
                 .sorted(Comparator.comparing(Meeting::getStartedAt)).toList();
 
         List<String> scheduleRooms = getAllScheduleRooms();
