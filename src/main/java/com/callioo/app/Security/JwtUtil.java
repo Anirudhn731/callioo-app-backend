@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import com.callioo.app.Model.User;
+import com.callioo.app.Model.Users;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -31,7 +31,7 @@ public class JwtUtil {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(User user) {
+    public String generateToken(Users user) {
         LocalDateTime tokenCreateTime = LocalDateTime.now();
         LocalDateTime tokenValidity = tokenCreateTime.plusHours(EXPIRATION_DURATION_HOURS);
         Date tokenCreatedTimeDate = Date.from(tokenCreateTime.atZone(ZoneId.systemDefault()).toInstant());

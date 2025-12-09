@@ -2,15 +2,15 @@ package com.callioo.app.Repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.callioo.app.Model.User;
+import com.callioo.app.Model.Users;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<Users, String> {
 
-    Optional<User> findByEmail(String email);
+    Optional<Users> findByEmail(String email);
 
 }

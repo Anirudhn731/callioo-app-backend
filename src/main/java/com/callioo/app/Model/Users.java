@@ -4,8 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity(name = "User")
-public class User {
+@Entity(name = "Users")
+public class Users {
 
     @Id
     private String email;
@@ -18,7 +18,7 @@ public class User {
     private String avatarImage;
 
     // No-arg constructor
-    public User() {
+    public Users() {
     }
 
     // Getters and Setters

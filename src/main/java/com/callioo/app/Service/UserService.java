@@ -1,12 +1,13 @@
 package com.callioo.app.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.callioo.app.Model.User;
+import com.callioo.app.Model.Users;
 import com.callioo.app.Repository.UserRepository;
 import com.callioo.app.Security.JwtUtil;
 
@@ -23,7 +24,11 @@ public class UserService {
     @Autowired
     private JwtUtil jwtUtil;
 
-    public boolean registerUser(User newUser) {
+    public List<Users> getAllUsers() {
+        return userRepo.findAll();
+    }
+
+    public boolean registerUser(Users newUser) {
         if (findByEmail(newUser.getEmail()).orElse(null) == null) {
             newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
             if (newUser.getAvatarImage() == null || newUser.getAvatarImage() == "") {
@@ -37,13 +42,13 @@ public class UserService {
             return false;
     }
 
-    public Optional<User> findByEmail(String email) {
+    public Optional<Users> findByEmail(String email) {
         return userRepo.findByEmail(email);
     }
 
-    public String updateUser(User updatedUser) {
+    public String updateUser(Users updatedUser) {
         try {
-            User user = findByEmail(updatedUser.getEmail()).orElseThrow(() -> new RuntimeException("user not found"));
+            Users user = findByEmail(updatedUser.getEmail()).orElseThrow(() -> new RuntimeException("user not found"));
 
             user.setFullName(updatedUser.getFullName());
             if (!updatedUser.getPassword().isEmpty())

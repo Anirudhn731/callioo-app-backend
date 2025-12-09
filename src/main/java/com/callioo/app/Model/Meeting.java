@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 // import jakarta.persistence.PrePersist;
+// import jakarta.persistence.Lob;
 
 @Entity
 @IdClass(MeetingId.class)
@@ -28,6 +29,9 @@ public class Meeting {
 
     private Instant endedAt;
 
+    // @Lob
+    // private String jwtToken;
+
     // @PrePersist
     // public void generateId() {
     // if (meetingRoomId == null) {
@@ -39,11 +43,12 @@ public class Meeting {
     }
 
     // Can be used for immediate meetings
-    public Meeting(String email, String createdByEmail) {
-        this.meetingRoomId = NanoIdUtils.randomNanoId();
+    public Meeting(String meetingRoomId, String email, String createdByEmail) {
+        this.meetingRoomId = meetingRoomId;
         this.email = email;
         this.createdByEmail = createdByEmail;
         this.startedAt = Instant.now();
+        System.out.println("Start DateTime(in UTC) :- " + startedAt.toString());
 
     }
 
@@ -91,6 +96,10 @@ public class Meeting {
         return this.endedAt;
     }
 
+    // public String getJwtToken() {
+    // return jwtToken;
+    // }
+
     public void setCreatedByEmail(String createdByEmail) {
         this.createdByEmail = createdByEmail;
     }
@@ -103,4 +112,7 @@ public class Meeting {
         this.endedAt = endedAt;
     }
 
+    // public void setJwtToken(String jwtToken) {
+    // this.jwtToken = jwtToken;
+    // }
 }

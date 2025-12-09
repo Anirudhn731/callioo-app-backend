@@ -22,7 +22,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
         registry.addHandler(new UserWSHandler(), "/ws")
                 .addInterceptors(jwtHandshakeInterceptor)
-                .setAllowedOrigins("http://localhost:5173");
+                .setAllowedOrigins(SecurityConfig.FRONTEND_URL);
     }
 
 }
